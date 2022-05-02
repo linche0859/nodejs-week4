@@ -18,7 +18,7 @@ const getHttpResponseContent = ({ success = true, data } = {}) => {
  */
 const getErrorMessage = ({ field, message }) => {
   const result = { errors: {} };
-  if (field) result.errors[field].message = message;
+  if (field) result.errors[field] = { message };
   return result;
 };
 
