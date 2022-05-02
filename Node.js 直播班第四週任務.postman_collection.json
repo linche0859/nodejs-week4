@@ -1,0 +1,89 @@
+{
+	"info": {
+		"_postman_id": "ca331f60-d76e-4ba1-8162-660ffc2e7886",
+		"name": "Node.js 直播班第四週任務",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "取得貼文",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{API_URL}}/posts?sort=desc&q=計畫",
+					"host": [
+						"{{API_URL}}"
+					],
+					"path": [
+						"posts"
+					],
+					"query": [
+						{
+							"key": "sort",
+							"value": "desc"
+						},
+						{
+							"key": "q",
+							"value": "計畫"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "註冊",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"name\": \"兩金勘吉\",\r\n    \"email\": \"Test@gmail.com\",\r\n    \"password\": \"12345678\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{API_URL}}/users/register",
+					"host": [
+						"{{API_URL}}"
+					],
+					"path": [
+						"users",
+						"register"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "新增貼文",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"content\": \"各位我有一個作戰計畫\",\r\n    \"image\": \"https://....\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{API_URL}}/posts",
+					"host": [
+						"{{API_URL}}"
+					],
+					"path": [
+						"posts"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
