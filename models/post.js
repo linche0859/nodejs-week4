@@ -10,7 +10,7 @@ const schema = {
     type: String,
     default: '',
   },
-  user: [{ type: Schema.Types.ObjectId, ref: 'User' }],
+  user: { type: Schema.Types.ObjectId, ref: 'User' },
   createdAt: {
     type: Date,
     default: Date.now,
