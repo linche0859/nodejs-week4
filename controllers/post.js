@@ -5,8 +5,23 @@ const {
 } = require('../utils/response');
 
 const post = {
-  // 取得貼文
   getPosts: async (req, res) => {
+    /**
+     * #swagger.tags = ['Posts']
+     * #swagger.summary = '取得貼文'
+     */
+    /**
+     * #swagger.parameters['q'] = {
+        in: 'query',
+        description: '關鍵字',
+        type: 'string',
+      }
+      #swagger.parameters['sort'] = {
+        in: 'query',
+        description: '排序方式，desc 為新至舊，asc 為舊至新',
+        type: 'string',
+      }
+     */
     const {
       query: { q, sort = 'desc' },
     } = req;
@@ -16,11 +31,30 @@ const post = {
       .sort({
         createdAt: sort === 'desc' ? -1 : 1,
       });
-    res.json(getHttpResponseContent({ data: posts }));
+    /**
+      #swagger.responses[200] = {
+        description: '成功取得貼文',
+        schema: { $ref: '#/definitions/Posts' }
+      }
+     */
+    res.status(200).json(getHttpResponseContent({ data: posts }));
   },
-  // 新增貼文
   postOnePost: async (req, res) => {
+    /**
+     * #swagger.tags = ['Posts']
+     * #swagger.summary = '新增貼文'
+     */
     try {
+      /**
+        #swagger.parameters['parameter_name'] = {
+          in: 'body',
+          description: '貼文資料',
+          schema: {
+            $content: '貼文內容',
+            image: '貼文圖片連結'
+          }
+        }
+       */
       const {
         body: { content, image },
       } = req;
@@ -32,9 +66,20 @@ const post = {
       // 先寫固定的使用者編號
       const userId = '626fa289b74a64eeba707e84';
       const post = await Post.create({ content, image, user: userId });
-      res.json(getHttpResponseContent({ data: post }));
+      /**
+        #swagger.responses[200] = {
+          description: '新增貼文成功',
+          schema: { $ref: '#/definitions/Posts' }
+        }
+     */
+      res.status(200).json(getHttpResponseContent({ data: post }));
     } catch (error) {
-      console.log(error);
+      /**
+        #swagger.responses[400] = {
+          description: '新增貼文失敗',
+          schema: { $ref: '#/definitions/Error' }
+        }
+     */
       res
         .status(400)
         .json(getHttpResponseContent({ success: false, data: error }));
