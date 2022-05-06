@@ -35,7 +35,7 @@ const user = {
       if (password && password.length < 8)
         throw getErrorMessage({
           field: 'password',
-          message: '密碼需至少 8 碼以上，並中英混合',
+          message: '密碼需至少 8 碼以上，並英數混合',
         });
 
       const exist = await User.findOne({ email });
